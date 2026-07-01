@@ -85,32 +85,9 @@ This approach keeps API costs minimal while ensuring every caregiver sees conten
 
 ---
 
-## Running Locally
+## Live Demo
 
-**1. Clone the repository and install dependencies:**
-
-```bash
-npm install
-```
-
-**2. Set up environment variables:**
-
-Copy `.env.example` to `.env.local` and fill in the values:
-
-```
-NEXT_PUBLIC_SUPABASE_URL=        # From Supabase project settings
-NEXT_PUBLIC_SUPABASE_ANON_KEY=   # From Supabase project settings
-SUPABASE_SERVICE_ROLE_KEY=       # From Supabase project settings
-ANTHROPIC_API_KEY=               # From console.anthropic.com
-```
-
-**3. Start the development server:**
-
-```bash
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) to see the app.
+[https://wello-chi.vercel.app](https://wello-chi.vercel.app)
 
 ---
 
