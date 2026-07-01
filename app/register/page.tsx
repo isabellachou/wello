@@ -24,15 +24,22 @@ export default function RegisterPage() {
       }
 
       const supabase = createClient()
-      const { error: signUpError } = await supabase.auth.signUp({
+      const { data, error: signUpError } = await supabase.auth.signUp({
         email,
         password,
         options: { data: { full_name: fullName } },
       })
 
-      if (signUpError) {
+      if (signUpError && !signUpError.message.toLowerCase().includes('rate limit')) {
         setError(signUpError.message)
         return
+      }
+
+      if (data.user) {
+        await supabase.from('profiles').upsert({
+          id: data.user.id,
+          full_name: fullName,
+        })
       }
 
       router.push('/questions')

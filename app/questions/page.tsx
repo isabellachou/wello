@@ -15,7 +15,7 @@ const times = [
   'More than 5 years',
 ]
 
-type Step = 'intro' | number | 'done'
+type Step = 'intro' | number
 
 const INITIAL_ANSWERS: Answers = {
   name: '',
@@ -71,17 +71,17 @@ export default function QuestionsPage() {
         })
 
         if (error) {
-          setSaveError('Your answers could not be saved. Please try again.')
+          console.error('children insert error:', error)
+          setSaveError(error.message)
           return
         }
       }
 
-      setStep('done')
+      router.push('/welcome')
     })
   }
 
   function goBack() {
-    if (step === 'done') return setStep(total - 1)
     if (typeof step === 'number' && step > 0) return setStep(step - 1)
     if (typeof step === 'number') return setStep('intro')
   }
@@ -109,30 +109,7 @@ export default function QuestionsPage() {
     )
   }
 
-  if (step === 'done') {
-    return (
-      <main className="hero-bg flex min-h-screen flex-col items-center justify-center px-6 text-center">
-        <div className="flex flex-col items-center gap-8">
-          <div className="flex flex-col items-center gap-3">
-            <h1 className="font-serif text-5xl font-bold text-wello-dark-brown">
-              Thank you!
-            </h1>
-            <p className="max-w-sm text-lg text-wello-grey-brown">
-              You&apos;re all set. Welcome to Wello.
-            </p>
-          </div>
-          <button
-            onClick={() => router.push('/welcome')}
-            className="rounded-full bg-wello-yellow px-10 py-3 font-semibold text-wello-dark-brown transition-colors hover:bg-wello-dark-brown hover:text-wello-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wello-dark-brown focus-visible:ring-offset-2"
-          >
-            Finish
-          </button>
-        </div>
-      </main>
-    )
-  }
-
-  const valid = isValid()
+const valid = isValid()
 
   return (
     <main className="hero-bg flex min-h-screen items-center justify-center px-6 py-12">
