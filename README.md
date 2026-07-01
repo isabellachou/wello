@@ -1,5 +1,7 @@
 # Wello
 
+<img src="public/wello-logo.png" alt="Wello" width="120" />
+
 **A warm companion for caregivers of children with mental and cognitive disabilities.**
 
 Wello is a web application that gives caregivers personalized, AI-generated guidance based on their child's specific diagnosis, age, medications, and family history. It combines a structured onboarding flow, a Claude-powered dashboard, and a daily journal so caregivers always have the context and support they need close at hand.
@@ -130,6 +132,16 @@ app/
   components/
     AccountMenu.tsx     # Hamburger menu with sign out
 ```
+
+---
+
+---
+
+## Team
+
+**Sour Hack Kids**
+
+Isabella Chou, Sarah Park, Tulsi Patel, Nyan Huynh, Justin Greenberg
 
 ---
 
