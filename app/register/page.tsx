@@ -2,15 +2,16 @@
 
 import { useState, useTransition } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 
 export default function RegisterPage() {
+  const router = useRouter()
   const [fullName, setFullName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirm, setConfirm] = useState('')
   const [error, setError] = useState<string | null>(null)
-  const [submitted, setSubmitted] = useState(false)
   const [isPending, startTransition] = useTransition()
 
   function handleAction() {
@@ -34,30 +35,8 @@ export default function RegisterPage() {
         return
       }
 
-      setSubmitted(true)
+      router.push('/questions')
     })
-  }
-
-  if (submitted) {
-    return (
-      <main className="hero-bg flex min-h-screen items-center justify-center px-6">
-        <div className="w-full max-w-sm rounded-2xl bg-wello-white px-8 py-10 text-center shadow-sm">
-          <h1 className="font-serif mb-3 text-3xl font-bold text-wello-dark-brown">
-            Check your email
-          </h1>
-          <p className="mb-6 text-sm leading-relaxed text-wello-grey-brown">
-            We sent a confirmation link to <span className="font-medium text-wello-dark-brown">{email}</span>.
-            Click it to activate your account, then log in.
-          </p>
-          <Link
-            href="/login"
-            className="inline-block rounded-full bg-wello-yellow px-8 py-3 font-semibold text-wello-dark-brown transition-opacity hover:opacity-90"
-          >
-            Go to Log In
-          </Link>
-        </div>
-      </main>
-    )
   }
 
   return (
@@ -144,7 +123,7 @@ export default function RegisterPage() {
           <button
             type="submit"
             disabled={isPending}
-            className="mt-2 rounded-full bg-wello-yellow py-3 font-semibold text-wello-dark-brown transition-opacity hover:opacity-90 disabled:opacity-50"
+            className="mt-2 rounded-full bg-wello-yellow py-3 font-semibold text-wello-dark-brown transition-colors hover:bg-wello-dark-brown hover:text-wello-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wello-dark-brown focus-visible:ring-offset-2 disabled:opacity-50"
           >
             {isPending ? 'Creating account…' : 'Sign Up'}
           </button>

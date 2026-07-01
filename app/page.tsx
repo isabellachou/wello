@@ -17,13 +17,13 @@ export default function Home() {
         <div className="flex flex-col gap-3 sm:flex-row">
           <Link
             href="/register"
-            className="rounded-full bg-wello-yellow px-8 py-3 font-semibold text-wello-dark-brown transition-opacity hover:opacity-90"
+            className="rounded-full bg-wello-yellow px-8 py-3 font-semibold text-wello-dark-brown transition-colors hover:bg-wello-dark-brown hover:text-wello-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wello-dark-brown focus-visible:ring-offset-2"
           >
             Sign Up
           </Link>
           <Link
             href="/login"
-            className="rounded-full bg-wello-grey-brown px-8 py-3 font-semibold text-wello-white transition-opacity hover:opacity-90"
+            className="rounded-full bg-wello-grey-brown px-8 py-3 font-semibold text-wello-white transition-colors hover:bg-wello-dark-brown focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wello-dark-brown focus-visible:ring-offset-2"
           >
             Log In
           </Link>
