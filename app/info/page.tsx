@@ -13,7 +13,7 @@ type DashboardContent = {
 const NAV_ITEMS = [
   { icon: LayoutGrid, label: 'Dashboard', href: '/info' },
   { icon: UserRound, label: 'Child Profile', href: '/profile' },
-  { icon: NotebookText, label: 'Log Journal', href: '/info' },
+  { icon: NotebookText, label: 'Journal', href: '/journal' },
 ]
 
 function Column({

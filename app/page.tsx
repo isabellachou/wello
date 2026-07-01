@@ -1,9 +1,17 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Home() {
   return (
     <main className="hero-bg flex min-h-screen flex-col items-center justify-center px-6 text-center">
       <div className="flex max-w-xl flex-col items-center gap-8">
+        <Image
+          src="/wello-logo.png"
+          alt="Wello"
+          width={120}
+          height={120}
+          className="rounded-2xl shadow-md"
+        />
         <div className="flex flex-col items-center gap-4">
           <h1 className="font-serif text-5xl font-bold tracking-tight text-wello-dark-brown sm:text-6xl">
             Welcome to Wello

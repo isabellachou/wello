@@ -48,10 +48,10 @@ export default async function WelcomePage() {
               Dashboard
             </Link>
             <Link
-              href="/chat"
+              href="/journal"
               className="rounded-full bg-wello-grey-brown px-10 py-3 font-semibold text-wello-white transition-colors hover:bg-wello-dark-brown hover:text-wello-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wello-dark-brown focus-visible:ring-offset-2"
             >
-              Chat
+              Journal
             </Link>
           </div>
         </div>

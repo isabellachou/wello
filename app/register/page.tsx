@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 
@@ -49,6 +50,7 @@ export default function RegisterPage() {
   return (
     <main className="hero-bg flex min-h-screen items-center justify-center px-6">
       <div className="w-full max-w-sm rounded-2xl bg-wello-white px-8 py-10 shadow-sm">
+        <Image src="/wello-logo.png" alt="Wello" width={56} height={56} className="mb-3 rounded-xl" />
         <h1 className="font-serif mb-1 text-3xl font-bold text-wello-dark-brown">
           Create your account
         </h1>
