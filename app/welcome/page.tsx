@@ -1,51 +1,58 @@
-import Link from "next/link";
-import { Source_Serif_4 } from "next/font/google";
+import Link from 'next/link'
+import { redirect } from 'next/navigation'
+import { createClient } from '@/lib/supabase/server'
 
-const sourceSerif = Source_Serif_4({
-  subsets: ["latin"],
-  weight: ["600"],
-});
+export default async function WelcomePage() {
+  const supabase = await createClient()
 
-const PLACEHOLDER_USERNAME = "Friend";
+  const { data: { user } } = await supabase.auth.getUser()
 
-const noiseSvg = `<svg xmlns='http://www.w3.org/2000/svg' width='250' height='250'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='matrix' values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.45 0'/></filter><rect width='100%' height='100%' filter='url(#n)'/></svg>`;
-const noiseBackgroundImage = `url("data:image/svg+xml,${encodeURIComponent(noiseSvg)}")`;
+  if (!user) {
+    redirect('/login')
+  }
 
-export default function WelcomePage() {
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('full_name')
+    .eq('id', user.id)
+    .maybeSingle()
+
+  const firstName = profile?.full_name?.trim().split(' ')[0] || null
+
   return (
-    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[radial-gradient(ellipse_at_center,_#FDFBF1_0%,_#F5EBCE_45%,_#E2CFA0_100%)] p-6">
-      <div
-        className="pointer-events-none absolute inset-0 opacity-30 mix-blend-overlay"
-        style={{ backgroundImage: noiseBackgroundImage }}
-      />
+    <main className="hero-bg flex min-h-screen flex-col items-center justify-center px-6 text-center">
+      <div className="-translate-y-16 flex flex-col items-center gap-12">
+        <div className="flex flex-col items-center gap-3">
+          <h1 className="font-serif text-6xl font-bold text-wello-dark-brown sm:text-7xl">
+            Wello,
+          </h1>
+          {firstName && (
+            <p className="font-serif text-4xl font-light text-wello-grey-brown">
+              {firstName}
+            </p>
+          )}
+        </div>
 
-      <div className="relative z-10 flex -translate-y-16 flex-col items-center gap-10 text-center">
-        <h1
-          className={`${sourceSerif.className} text-7xl font-semibold text-[#53453B]`}
-        >
-          Wello,
-        </h1>
-
-        <p className="text-lg tracking-widest text-[#53453B]/70">
-          [{PLACEHOLDER_USERNAME.toUpperCase()}]
-        </p>
-
-        <div className="flex items-center gap-6">
-          <Link
-            href="/info"
-            className="rounded-full bg-[#F8FECE] px-10 py-4 font-medium text-[#53453B] transition-colors hover:bg-[#F8FECE]/80"
-          >
-            Dashboard
-          </Link>
-
-          <Link
-            href="/chat"
-            className="rounded-full bg-[#7C7167]/50 px-10 py-4 font-medium text-[#53453B] transition-colors hover:bg-[#7C7167]/65"
-          >
-            Chat
-          </Link>
+        <div className="flex flex-col items-center gap-2">
+          <p className="text-wello-grey-brown">
+            We&apos;re glad you&apos;re here.
+          </p>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <Link
+              href="/info"
+              className="rounded-full bg-wello-yellow px-10 py-3 font-semibold text-wello-dark-brown transition-opacity hover:opacity-90"
+            >
+              Dashboard
+            </Link>
+            <Link
+              href="/chat"
+              className="rounded-full bg-wello-grey-brown px-10 py-3 font-semibold text-wello-white transition-opacity hover:opacity-90"
+            >
+              Chat
+            </Link>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    </main>
+  )
 }
